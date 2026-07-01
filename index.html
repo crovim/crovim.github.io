@@ -500,6 +500,128 @@ footer .contact-row a:hover { border-color: var(--accent); color: var(--accent);
   nav.toc { gap: 1.2rem; top: 33px; }
 }
 
+
+/* === MOBILE RESPONSIVENESS (improved) === */
+@media (max-width: 720px) {
+  header.hero { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hero-photo { width: 110px; height: 110px; }
+  .about-grid, .dual-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+  nav.toc { gap: 1rem; top: 33px; padding: 0.9rem 1rem; }
+  section { padding: 2.5rem 1.2rem; }
+  .skills-wrap { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .lang-grid { grid-template-columns: 1fr; }
+  .timeline { padding-left: 1.4rem; }
+  .hero-text h1 { font-size: 2rem; }
+  .section-head h2 { font-size: 1.5rem; }
+  footer { padding: 2rem 1.2rem 3rem; }
+  footer .contact-row { flex-direction: column; align-items: center; gap: 0.8rem; }
+  .modal { padding: 1.4rem; }
+  .hero-meta { flex-direction: column; gap: 0.5rem; }
+  .statusbar { font-size: 0.65rem; padding: 0.4rem 1rem; }
+  .project-toolbar { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  nav.toc a span.num { display: none; }
+}
+
+/* === CAROUSEL === */
+.carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.35s ease;
+}
+.carousel-track img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel-placeholder {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 1rem;
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  z-index: 5;
+  color: var(--ink);
+  transition: background .2s;
+}
+.carousel-btn:hover { background: white; }
+.carousel-btn.prev { left: 6px; }
+.carousel-btn.next { right: 6px; }
+.carousel-dots {
+  position: absolute;
+  bottom: 6px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.carousel-dots span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background .2s;
+}
+.carousel-dots span.active { background: white; }
+
+/* Multi-image upload area */
+.image-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+.image-thumbs .thumb-wrap {
+  position: relative;
+  width: 72px; height: 52px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.image-thumbs .thumb-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.image-thumbs .thumb-wrap button {
+  position: absolute; top: 1px; right: 2px;
+  background: rgba(0,0,0,0.55);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 0.6rem;
+  cursor: pointer;
+  padding: 1px 3px;
+  line-height: 1.4;
+}
+
 </style>
 </head>
 <body>
@@ -520,10 +642,10 @@ footer .contact-row a:hover { border-color: var(--accent); color: var(--accent);
     is expensive.</p>
     <div class="hero-meta">
       <span>📍 Divinópolis, MG — Brazil</span>
-      <span><a href="mailto:clovisr.junior.cr@gmail.com">clovisr.junior.cr@gmail.com</a></span>
+      <span><a href="mailto:clovisr.junior.cr@gmail.com?subject=Portfolio%20Contact%20%E2%80%94%20Hello%20Cl%C3%B3vis&body=Hi%20Cl%C3%B3vis%2C%0A%0AI%20found%20your%20portfolio%20and%20would%20like%20to%20connect.%0A%0A">clovisr.junior.cr@gmail.com</a></span>
       <span><a href="https://www.linkedin.com/in/cl%C3%B3vis-junior/" target="_blank">LinkedIn</a></span>
       <span><a href="https://github.com/crovim" target="_blank">GitHub</a></span>
-      <span><a href="#" id="downloadCV">Download CV ↓</a></span>
+      
     </div>
   </div>
   <div class="hero-photo">
@@ -567,11 +689,12 @@ footer .contact-row a:hover { border-color: var(--accent); color: var(--accent);
       <dd>Divinópolis, Minas Gerais, Brazil</dd>
       <dt>Education</dt>
       <dd>B.Eng. Biomedical Engineering, UFU</dd>
+      <dd>M.Sc. Biomedical Engineering, UFU (in progress)</dd>
       <dd>Postgrad. Machine Learning Engineering, DSA (in progress)</dd>
-      <dt>Domains</dt>
-      <dd>Fraud &amp; risk · Cybersecurity · Healthcare · BI</dd>
+      <dt>Expertise across</dt>
+      <dd>Financial risk &amp; fraud prevention · Security intelligence · Clinical &amp; public health analytics · Business intelligence &amp; strategy</dd>
       <dt>Looking for</dt>
-      <dd>Data Analyst / Data Engineer / Data Scientist roles, remote or international</dd>
+      <dd>Any role where the core of the work is <strong>data</strong> — analyst, engineer, scientist, BI, business, marketing, HR, or operations. Title is flexible; depth with data is not. Open to remote &amp; international.</dd>
     </dl>
   </div>
 </section>
@@ -723,6 +846,12 @@ footer .contact-row a:hover { border-color: var(--accent); color: var(--accent);
       </div>
       <div class="edu-item">
         <h3>Universidade Federal de Uberlândia (UFU)</h3>
+        <div class="deg">M.Sc. — Biomedical Engineering (in progress)</div>
+        <div class="deg" style="font-size:0.82rem; color:var(--ink-soft); margin-top:0.25rem;">Thesis: "Development of a framework for multimodal biomedical data integration to support clinical research in movement disorders"</div>
+        <div class="period">In progress</div>
+      </div>
+      <div class="edu-item">
+        <h3>Universidade Federal de Uberlândia (UFU)</h3>
         <div class="deg">B.Eng. — Biomedical Engineering</div>
         <div class="period">2017 — 2021</div>
       </div>
@@ -767,10 +896,10 @@ footer .contact-row a:hover { border-color: var(--accent); color: var(--accent);
 
 <footer id="contact">
   <div class="contact-row">
-    <a href="mailto:clovisr.junior.cr@gmail.com">clovisr.junior.cr@gmail.com</a>
+    <a href="mailto:clovisr.junior.cr@gmail.com?subject=Portfolio%20Contact%20%E2%80%94%20Hello%20Cl%C3%B3vis&body=Hi%20Cl%C3%B3vis%2C%0A%0AI%20found%20your%20portfolio%20and%20would%20like%20to%20connect.%0A%0A">clovisr.junior.cr@gmail.com</a>
     <a href="https://www.linkedin.com/in/cl%C3%B3vis-junior/" target="_blank">LinkedIn</a>
     <a href="https://github.com/crovim" target="_blank">GitHub</a>
-    <a href="tel:+5511991369157">+55 11 99136-9157</a>
+    <a href="https://wa.me/5511991369157?text=Hi%20Cl%C3%B3vis%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank">+55 11 99136-9157 (WhatsApp)</a>
   </div>
   <p>© 2026 Clóvis Júnior. Built with care, deployed for free.</p>
 </footer>
@@ -808,8 +937,8 @@ footer .contact-row a:hover { border-color: var(--accent); color: var(--accent);
 
       <label>Screenshot / diagram</label>
       <div class="file-drop" id="fileDrop">
-        Click to upload an image (PNG/JPG) — or paste a screenshot
-        <input type="file" id="pImage" accept="image/*" style="display:none">
+        Click to upload images (PNG/JPG) — or paste screenshots<br><small style="opacity:.7">Multiple images supported — they become a carousel</small>
+        <input type="file" id="pImage" accept="image/*" multiple style="display:none">
         <div id="imgPreviewWrap"></div>
       </div>
 
@@ -837,6 +966,7 @@ const seedProjects = [
     impact: "Supported large-scale fraud prevention across Brazil's instant payment system",
     stack: "Python, PySpark, Azure Databricks, SQL",
     link: "",
+    imgs: [],
     img: null,
     seed: true
   },
@@ -848,6 +978,7 @@ const seedProjects = [
     impact: "Took a security analytics function from zero to a centralized, audit-ready intelligence layer",
     stack: "GCP, BigQuery, Cloud Functions, Pub/Sub, Cloud Storage, Secret Manager, Python",
     link: "",
+    imgs: [],
     img: null,
     seed: true
   },
@@ -859,6 +990,7 @@ const seedProjects = [
     impact: "Used for data-driven public health insight at national scale",
     stack: "SQL, Python, Power BI / Tableau, GCP",
     link: "",
+    imgs: [],
     img: null,
     seed: true
   },
@@ -870,6 +1002,7 @@ const seedProjects = [
     impact: "Implemented and managed OKRs for 50,000+ employees",
     stack: "SQL, Power BI, KPI design, data governance",
     link: "",
+    imgs: [],
     img: null,
     seed: true
   },
@@ -881,6 +1014,7 @@ const seedProjects = [
     impact: "Enabled critical real-time risk decisions on financial transactions",
     stack: "Python, SQL, Azure Databricks, statistical modeling",
     link: "",
+    imgs: [],
     img: null,
     seed: true
   },
@@ -892,6 +1026,7 @@ const seedProjects = [
     impact: "Improved clinical study recruitment through advanced patient-matching",
     stack: "SQL, Python, BigQuery (GCP)",
     link: "",
+    imgs: [],
     img: null,
     seed: true
   }
@@ -918,6 +1053,24 @@ function saveProjects(projects) {
 
 let projects = loadProjects();
 
+
+function initCarousel(c) {
+  const track = c.querySelector('.carousel-track');
+  if (!track) return;
+  const imgs = track.querySelectorAll('img');
+  if (imgs.length <= 1) return;
+  let idx = 0;
+  const dots = c.querySelectorAll('.carousel-dots span');
+  function go(n) {
+    idx = (n + imgs.length) % imgs.length;
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+  }
+  c.querySelector('.prev').addEventListener('click', e => { e.stopPropagation(); go(idx - 1); });
+  c.querySelector('.next').addEventListener('click', e => { e.stopPropagation(); go(idx + 1); });
+  dots.forEach((d, i) => d.addEventListener('click', e => { e.stopPropagation(); go(i); }));
+}
+
 // ============ Render ============
 const grid = document.getElementById('projectsGrid');
 
@@ -940,10 +1093,20 @@ function render() {
     card.className = "project-card";
     const stackChips = (p.stack || "").split(",").map(s => s.trim()).filter(Boolean)
       .map(s => `<span class="chip">${escapeHTML(s)}</span>`).join("");
+    // Build carousel HTML
+    const imgs = p.imgs || (p.img ? [p.img] : []);
+    let carouselHTML;
+    if (imgs.length === 0) {
+      carouselHTML = `<div class="carousel"><div class="carousel-track"><div class="carousel-placeholder">${typeIcon(p.type)}<br>No image yet</div></div></div>`;
+    } else if (imgs.length === 1) {
+      carouselHTML = `<div class="carousel"><div class="carousel-track"><img src="${imgs[0]}" alt="${escapeHTML(p.title)}"></div></div>`;
+    } else {
+      const trackImgs = imgs.map(src => `<img src="${src}" alt="${escapeHTML(p.title)}">`).join('');
+      const dots = imgs.map((_,i) => `<span class="${i===0?'active':''}"></span>`).join('');
+      carouselHTML = `<div class="carousel" data-idx="0"><div class="carousel-track">${trackImgs}</div><button class="carousel-btn prev" aria-label="prev">‹</button><button class="carousel-btn next" aria-label="next">›</button><div class="carousel-dots">${dots}</div></div>`;
+    }
     card.innerHTML = `
-      <div class="thumb">
-        ${p.img ? `<img src="${p.img}" alt="${escapeHTML(p.title)}">` : `<div class="placeholder">${typeIcon(p.type)}<br>No image yet</div>`}
-      </div>
+      ${carouselHTML}
       <div class="body">
         <div class="ptype">${typeIcon(p.type)} ${escapeHTML(p.type)}</div>
         <h3>${escapeHTML(p.title)}</h3>
@@ -967,6 +1130,8 @@ function render() {
   addCard.innerHTML = `<div class="plus">+</div><div>Add another project</div>`;
   grid.appendChild(addCard);
 
+  // bind carousel
+  grid.querySelectorAll('.carousel').forEach(c => initCarousel(c));
   // bind events
   grid.querySelectorAll('.edit-btn').forEach(b => b.addEventListener('click', () => openModal(b.dataset.id)));
   grid.querySelectorAll('.del-btn').forEach(b => b.addEventListener('click', () => {
@@ -990,11 +1155,11 @@ const overlay = document.getElementById('modalOverlay');
 const form = document.getElementById('projectForm');
 const modalTitle = document.getElementById('modalTitle');
 let editingId = null;
-let pendingImg = null;
+let pendingImgs = [];
 
 function openModal(id) {
   editingId = id;
-  pendingImg = null;
+  pendingImgs = [];
   document.getElementById('imgPreviewWrap').innerHTML = "";
   if (id) {
     const p = projects.find(x => x.id === id);
@@ -1005,10 +1170,8 @@ function openModal(id) {
     document.getElementById('pImpact').value = p.impact || "";
     document.getElementById('pStack').value = p.stack || "";
     document.getElementById('pLink').value = p.link || "";
-    if (p.img) {
-      pendingImg = p.img;
-      document.getElementById('imgPreviewWrap').innerHTML = `<img src="${p.img}">`;
-    }
+    pendingImgs = p.imgs || (p.img ? [p.img] : []);
+    renderPendingThumbs();
   } else {
     modalTitle.textContent = "Add project";
     form.reset();
@@ -1030,14 +1193,27 @@ const fileDrop = document.getElementById('fileDrop');
 const fileInput = document.getElementById('pImage');
 fileDrop.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  handleImageFile(file);
+  Array.from(e.target.files).forEach(file => handleImageFile(file));
 });
 fileDrop.addEventListener('paste', handlePaste);
 document.addEventListener('paste', (e) => {
   if (overlay.classList.contains('open')) handlePaste(e);
 });
+
+
+function renderPendingThumbs() {
+  const wrap = document.getElementById('imgPreviewWrap');
+  if (!wrap) return;
+  if (pendingImgs.length === 0) { wrap.innerHTML = ''; return; }
+  wrap.innerHTML = '<div class="image-thumbs">' +
+    pendingImgs.map((src, i) =>
+      `<div class="thumb-wrap"><img src="${src}"><button data-i="${i}" title="Remove">✕</button></div>`
+    ).join('') + '</div>';
+  wrap.querySelectorAll('button[data-i]').forEach(b => b.addEventListener('click', () => {
+    pendingImgs.splice(parseInt(b.dataset.i), 1);
+    renderPendingThumbs();
+  }));
+}
 
 function handlePaste(e) {
   const items = (e.clipboardData || {}).items || [];
@@ -1061,8 +1237,8 @@ function handleImageFile(file) {
       canvas.height = img.height * scale;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      pendingImg = canvas.toDataURL('image/jpeg', 0.82);
-      document.getElementById('imgPreviewWrap').innerHTML = `<img src="${pendingImg}">`;
+      pendingImgs.push(canvas.toDataURL('image/jpeg', 0.82));
+      renderPendingThumbs();
     };
     img.src = ev.target.result;
   };
@@ -1079,7 +1255,8 @@ form.addEventListener('submit', (e) => {
     impact: document.getElementById('pImpact').value.trim(),
     stack: document.getElementById('pStack').value.trim(),
     link: document.getElementById('pLink').value.trim(),
-    img: pendingImg
+    imgs: [...pendingImgs],
+    img: pendingImgs[0] || null
   };
   if (!data.title) return;
 
